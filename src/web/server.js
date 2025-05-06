@@ -32,6 +32,9 @@ const contactController = (await import('./controllers/ContactController.js')).C
   createContact: createContact(contactRepo),
   getContacts: getContacts(contactRepo),
 });
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "server is running" });
+});
 
 app.use('/api/loans', loanRoutes(loanController));
 app.use('/api/contacts', contactRoutes(contactController));
