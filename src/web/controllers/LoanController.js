@@ -1,6 +1,10 @@
 export const LoanController = (loanUseCases) => ({
   createLoan: async (req, res, next) => {
     try {
+       const isExist=await loanUseCases.findContact(req.body?.contactId)
+      if(!isExist){
+        return res.status(409).json({messgae:'user is not exist'});
+      }
       const loan = await loanUseCases.createLoan(req.body);
       res.status(201).json(loan);
     } catch (err) {

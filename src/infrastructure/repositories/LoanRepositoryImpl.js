@@ -1,4 +1,5 @@
-import { LoanModel } from '../database/models/LoanModel.js';
+import { ContactModel } from "../database/models/ContactModel.js";
+import { LoanModel } from "../database/models/LoanModel.js";
 
 export class LoanRepositoryImpl {
   async createLoan(loanData) {
@@ -7,7 +8,7 @@ export class LoanRepositoryImpl {
   }
 
   async getLoans() {
-    return await LoanModel.find().populate('contactId');
+    return await LoanModel.find().populate("contactId");
   }
 
   async markAsPaid(loanId, isPartial) {
@@ -21,7 +22,10 @@ export class LoanRepositoryImpl {
     upcoming.setDate(now.getDate() + 7);
     return await LoanModel.find({
       dueDate: { $gte: new Date() },
-      isPaid: false
+      isPaid: false,
     });
+  }
+  async findContact(contactId) {
+    return await ContactModel.findById(contactId);
   }
 }

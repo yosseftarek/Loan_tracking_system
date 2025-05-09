@@ -13,6 +13,7 @@ import { getContacts } from '../UseCases/contact/GetContacts.js';
 import { LoanRepositoryImpl } from '../infrastructure/repositories/LoanRepositoryImpl.js';
 import { ContactRepositoryImpl } from '../infrastructure/repositories/ContactRepositoryImpl.js';
 import { findByEmail } from '../UseCases/contact/FindByEmail.js';
+import { findContact } from '../UseCases/loan/FindContact.js';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ const loanController = (await import('./controllers/LoanController.js')).LoanCon
   getLoans: getLoans(loanRepo),
   markLoanAsPaid: markLoanAsPaid(loanRepo),
   getUpcomingRepayments: getUpcomingRepayments(loanRepo),
+  findContact:findContact(loanRepo)
 });
 
 const contactController = (await import('./controllers/ContactController.js')).ContactController({
