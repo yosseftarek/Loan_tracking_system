@@ -12,6 +12,7 @@ import { createContact } from '../UseCases/contact/CreateContact.js';
 import { getContacts } from '../UseCases/contact/GetContacts.js';
 import { LoanRepositoryImpl } from '../infrastructure/repositories/LoanRepositoryImpl.js';
 import { ContactRepositoryImpl } from '../infrastructure/repositories/ContactRepositoryImpl.js';
+import { findByEmail } from '../UseCases/contact/FindByEmail.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ const loanController = (await import('./controllers/LoanController.js')).LoanCon
 const contactController = (await import('./controllers/ContactController.js')).ContactController({
   createContact: createContact(contactRepo),
   getContacts: getContacts(contactRepo),
+  findByEmail:findByEmail(contactRepo)
 });
 app.get("/", (req, res) => {
   res.status(200).json({ message: "server is running" });

@@ -9,4 +9,7 @@ export class ContactRepositoryImpl {
   async getContacts() {
     return await ContactModel.find();
   }
+  async findByEmail(email){
+    return await ContactModel.findOne({email})
+  }
 }
