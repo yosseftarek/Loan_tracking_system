@@ -15,11 +15,12 @@ dotenv.config();
 
 
 const MONGO_URI_ONLINE = process.env.MONGO_URI_ONLINE;
+const MONGO_URI = process.env.MONGO_URI;
 
 const connectionDB = async () => {
-    return await mongoose.connect(MONGO_URI_ONLINE)
+    return await mongoose.connect(MONGO_URI)
         .then(() => {
-            console.log(`connected to database on ${MONGO_URI_ONLINE}`)
+            console.log(`connected to database on ${MONGO_URI}`)
         }).catch((err) => {
             console.log({ msg: "fail to connect", err })
         })
