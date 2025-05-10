@@ -15,6 +15,7 @@ import { LoanRepositoryImpl } from '../infrastructure/repositories/LoanRepositor
 import { ContactRepositoryImpl } from '../infrastructure/repositories/ContactRepositoryImpl.js';
 import { findByEmail } from '../UseCases/contact/FindByEmail.js';
 import { findContact } from '../UseCases/loan/FindContact.js';
+import connectionDB from '../infrastructure/database/mongodb.js';
 
 dotenv.config();
 
@@ -47,12 +48,7 @@ app.use('/api/loans', loanRoutes(loanController));
 app.use('/api/contacts', contactRoutes(contactController));
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('MongoDB connected');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((err) => console.error('MongoDB connection error:', err));
+connectionDB()
+app.listen(process.env.PORT, () => {
+  console.log(`server is running on port ${process.env.PORT}`);
+});

@@ -34,7 +34,7 @@ export const LoanController = (loanUseCases) => ({
 
   getUpcomingRepayments: async (req, res, next) => {
     try {
-      const repayments = await loanUseCases.getUpcomingRepayments();
+      const repayments = await loanUseCases.getUpcomingRepayments(req.params.contactId);
       res.status(200).json(repayments);
     } catch (err) {
       next(err);

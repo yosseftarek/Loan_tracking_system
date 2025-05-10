@@ -6,7 +6,7 @@ export const loanRoutes = (loanController) => {
   router.post('/', loanController.createLoan);
   router.get('/', loanController.getLoans);
   router.patch('/:loanId/markPaid', loanController.markAsPaid);
-  router.get('/upcoming', loanController.getUpcomingRepayments);
+  router.get('/upcoming/:contactId', loanController.getUpcomingRepayments);
 
   return router;
 };

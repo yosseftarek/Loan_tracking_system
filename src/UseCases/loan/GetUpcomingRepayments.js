@@ -1,5 +1,5 @@
 export const getUpcomingRepayments = (loanRepository) => {
-  return async () => {
-    return await loanRepository.getUpcomingRepayments();
+  return async (loanData) => {
+    return await loanRepository.getUpcomingRepayments(loanData);
   };
 };

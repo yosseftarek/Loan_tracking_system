@@ -16,14 +16,15 @@ export class LoanRepositoryImpl {
     return await LoanModel.findByIdAndUpdate(loanId, update, { new: true });
   }
 
-  async getUpcomingRepayments() {
+  async getUpcomingRepayments(contactId) {
     const now = new Date();
     const upcoming = new Date();
     upcoming.setDate(now.getDate() + 7);
     return await LoanModel.find({
+      contactId,
       dueDate: { $gte: new Date() },
       isPaid: false,
-    });
+    }).populate("contactId");
   }
   async findContact(contactId) {
     return await ContactModel.findById(contactId);
